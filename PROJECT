@@ -1,0 +1,6 @@
+domain: tutorial.io
+layout:
+- go.kubebuilder.io/v3
+projectName: learn
+repo: turorial.io/learn
+version: "3"
