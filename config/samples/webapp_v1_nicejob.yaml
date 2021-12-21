@@ -1,0 +1,7 @@
+apiVersion: webapp.tutorial.io/v1
+kind: NiceJob
+metadata:
+  name: nicejob-sample
+spec:
+  # Add fields here
+  foo: bar
