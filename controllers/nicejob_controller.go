@@ -49,23 +49,6 @@ type Clock interface {
 	Now() time.Time
 }
 
-//+kubebuilder:rbac:groups=batch.tutorial.kubebuilder.io,resources=nicejobs,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=batch.tutorial.kubebuilder.io,resources=nicejobs/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=batch.tutorial.kubebuilder.io,resources=nicejobs/finalizers,verbs=update
-
-//+kubebuilder:rbac:groups=batch,resources=jobs,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=batch,resources=jobs/status,verbs=get
-
-// Reconcile is part of the main kubernetes reconciliation loop which aims to
-// move the current state of the cluster closer to the desired state.
-// TODO(user): Modify the Reconcile function to compare the state specified by
-// the NiceJob object against the actual cluster state, and then
-// perform operations to make the cluster state reflect the state specified by
-// the user.
-//
-// For more details, check Reconcile and its Result here:
-// - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.8.3/pkg/reconcile
-
 var (
 	scheduledTimeAnnotation = "batch.tutorial.kubebuilder.io/scheduled-at"
 )
@@ -173,6 +156,21 @@ var constructJobForNiceJob = func(r *NiceJobReconciler, niceJob *batchv1.NiceJob
 	return job, nil
 }
 
+//+kubebuilder:rbac:groups=webapp.tutorial.io,resources=nicejobs,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=webapp.tutorial.io,resources=nicejobs/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=webapp.tutorial.io,resources=nicejobs/finalizers,verbs=update
+//+kubebuilder:rbac:groups=batch,resources=jobs,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=batch,resources=jobs/status,verbs=get
+
+// Reconcile is part of the main kubernetes reconciliation loop which aims to
+// move the current state of the cluster closer to the desired state.
+// TODO(user): Modify the Reconcile function to compare the state specified by
+// the NiceJob object against the actual cluster state, and then
+// perform operations to make the cluster state reflect the state specified by
+// the user.
+//
+// For more details, check Reconcile and its Result here:
+// - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.8.3/pkg/reconcile
 func (r *NiceJobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	// _ = log.FromContext(ctx)
 	log := r.Log.WithValues("nicejob", req.NamespacedName)
