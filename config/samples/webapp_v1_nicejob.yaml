@@ -2,7 +2,7 @@ apiVersion: webapp.tutorial.io/v1
 kind: NiceJob
 metadata:
   name: nicejob-sample
-  namespace: try
+  namespace: db
 spec:
   schedule: "*/1 * * * *"
   startingDeadlineSeconds: 60

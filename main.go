@@ -86,6 +86,10 @@ func main() {
 		setupLog.Error(err, "unable to create controller", "controller", "NiceJob")
 		os.Exit(1)
 	}
+	if err = (&webappv1.NiceJob{}).SetupWebhookWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create webhook", "webhook", "NiceJob")
+		os.Exit(1)
+	}
 	//+kubebuilder:scaffold:builder
 
 	if err := mgr.AddHealthzCheck("healthz", healthz.Ping); err != nil {
